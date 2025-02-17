@@ -1,6 +1,6 @@
 class ProjectHistory < ApplicationRecord
   belongs_to :project
-  has_one :user, through: :project
+  belongs_to :user
 
   validates :action, presence: true
   validates :context, presence: true

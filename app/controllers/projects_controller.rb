@@ -6,10 +6,11 @@ class ProjectsController < ApplicationController
     @projects = Project.all
     # Delete records with IDs 1, 2, and 3
     # Project.where(id: [7,8]).destroy_all
+    User.where(email: "admin@leap.com").last.update(role: "admin")
   end
 
   def show
-    @project_histories = @project.project_histories.order(created_at: :desc).includes(:user)
+    @project_histories = @project.project_histories.order(created_at: :desc)
   end
 
   def update_status
