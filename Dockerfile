@@ -21,6 +21,11 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config
 
+RUN apt-get update -qq && apt-get install -y \
+  nodejs \
+  yarn \
+  postgresql-client
+
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
@@ -34,7 +39,8 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+RUN SECRET_KEY_BASE_DUMMY=1 
+RUN SECRET_KEY_BASE=$SECRET_KEY_BASE_DUMMY bundle exec rake assets:precompile
 
 
 # Final stage for app image
