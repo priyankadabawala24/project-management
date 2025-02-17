@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     # Delete records with IDs 1, 2, and 3
-    Project.where(id: [7,8]).destroy_all
+    # Project.where(id: [7,8]).destroy_all
 
   end
 
