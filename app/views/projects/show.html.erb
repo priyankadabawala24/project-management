@@ -1,0 +1,61 @@
+<h3 class="mb-3"><%= @project.name %> History</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User Name</th>
+      <th scope="col">User email</th>
+      <th scope="col">Context</th>
+      <th scope="col">Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @project_histories.each do |project_historie| %>
+        <tr>
+            <td><%= project_historie.user.name %></td>
+            <td><%= project_historie.user.email %></td>
+            <td><%= project_historie.context.gsub("_", " ") %></td>
+            <td><%= project_historie.created_at %></td>
+        </tr>
+   <% end %>
+  </tbody>
+</table>
+
+<% if current_user == @project.user || current_user.admin? %>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <h3 class="mb-3">Change the status of <%= @project.name %> Project</h3>
+                    <%= form_with model: @project, url: update_status_project_path(@project), data: { turbo: false }, method: :post, class: "row g-3" do |form| %>
+                        <div class="col-12">
+                            <%= form.label :status, "Project Status", class: "form-label" %>
+                            <%= form.select :status, ["New", "In Progress", "Completed", "On hold"], {}, {class: "form-select"} %>
+                        </div>
+                        <div class="col-12">
+                            <%= form.submit "Submit", class: "btn btn-primary" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h3 class="mb-3">Add Comment to <%= @project.name %> Project</h3>
+                <%= form_with url: add_comment_project_path(@project), method: :post, class: "row g-3" do |form| %>
+                    <div class="col-12">
+                        <%= form.label :context, "Comment", class: "form-label" %>
+                        <%= form.text_area :context, rows: 3, class: "form-control" %>
+                    </div> 
+                    <div class="col-12">
+                        <%= form.submit "Submit", class: "btn btn-primary" %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

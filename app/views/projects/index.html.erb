@@ -1,0 +1,21 @@
+<h3 class="mb-3">Projects</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Created At</th>
+      <th scope="col">History</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+        <tr>
+            <td><%= project.name %></td>
+            <td><%= project.status %></td>
+            <td><%= project.created_at %></td>
+            <td><%= link_to "View", project_path(project) %></td>
+        </tr>
+   <% end %>
+  </tbody>
+</table>
