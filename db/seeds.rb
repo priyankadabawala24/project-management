@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# For testing dummy data
+if User.first.present?
+    User.first.update(name: "priyanka")
+    User.first.projects.create(name: "Railway Updates")
+    User.first.projects.create(name: "hostel managment")
+end
+
+User.create!(email: 'admin@leap.com', password: 'admin', password_confirmation: 'admin', name: "admin")

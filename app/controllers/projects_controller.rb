@@ -13,9 +13,9 @@ class ProjectsController < ApplicationController
   def update_status
     if current_user == @project.user || current_user.admin?
       if @project.change_status(params[:project][:status], current_user)
-        flash[:notice] = "#{@project.name} Status Updated"
+        flash[:notice] = "#{@project&.name} Status Updated"
       else
-        flash[:alert] = "#{@project.name} Status Failed."
+        flash[:alert] = "#{@project&.name} Status Failed."
       end
     else
       flash[:alert] = "Access Denied"
@@ -25,9 +25,9 @@ class ProjectsController < ApplicationController
 
   def add_comment
     if @project.add_comment(params[:context], current_user)
-      flash[:notice] = "#{@project.name} Comment Added"
+      flash[:notice] = "#{@project&.name} Comment Added"
     else
-      flash[:alert] = "#{@project.name} Failed Comment"
+      flash[:alert] = "#{@project&.name} Failed Comment"
     end
     redirect_to project_url(@project)
   end
