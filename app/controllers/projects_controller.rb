@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
       User.first.projects.create(name: "hostel managment")
   end
   
-  User.create!(email: 'admin@leap.com', password: 'admin', password_confirmation: 'admin', name: "admin")
+  User.create!(email: 'admin@leap.com', password: 'admin123', password_confirmation: 'admin123', name: "admin")
   end
 
   def show
