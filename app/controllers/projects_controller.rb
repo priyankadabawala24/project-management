@@ -4,13 +4,9 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    if User.first.present?
-      User.first.update(name: "priyanka")
-      User.first.projects.create(name: "Railway Updates")
-      User.first.projects.create(name: "hostel managment")
-  end
-  
-  User.create!(email: 'admin@leap.com', password: 'admin123', password_confirmation: 'admin123', name: "admin")
+    # Delete records with IDs 1, 2, and 3
+    ModelName.where(id: [1, 2, 3, 4,5,6]).destroy_all
+
   end
 
   def show
