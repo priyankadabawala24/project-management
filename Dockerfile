@@ -62,7 +62,6 @@ USER rails:rails
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Run the seeds (make sure this works without requiring manual intervention)
-RUN bundle exec rake db:seed
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]

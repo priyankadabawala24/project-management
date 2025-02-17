@@ -4,6 +4,13 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    if User.first.present?
+      User.first.update(name: "priyanka")
+      User.first.projects.create(name: "Railway Updates")
+      User.first.projects.create(name: "hostel managment")
+  end
+  
+  User.create!(email: 'admin@leap.com', password: 'admin', password_confirmation: 'admin', name: "admin")
   end
 
   def show
